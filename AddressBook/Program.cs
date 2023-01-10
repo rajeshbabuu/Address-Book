@@ -1,4 +1,4 @@
-﻿using System.IO.Pipes;
+﻿
 
 namespace AddressBook
 {
@@ -6,64 +6,75 @@ namespace AddressBook
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to Address Book  \n");
+            Console.WriteLine("Welcome to Address Book");
 
-            ContactDetails contactDetail = new ContactDetails();
+            ContactDetailsRepository contactDetails = new ContactDetailsRepository();
+            Console.WriteLine("\nEnter X to Add Contact Details.");
+            string? input = Console.ReadLine();
 
-            Boolean flag = true;
+            Person contactDetail = null;
 
-
-            while (flag)
+            while (input == "X")
             {
-                Console.WriteLine("Enter 1 for Add person Details ");
-                Console.WriteLine("Enter 2 for displaying person details");
-                Console.WriteLine("Enter 3 for Exit");
+                Console.WriteLine("\nEnter First Name: ");
+                string? firstName = Console.ReadLine();
 
-                int userInput = int.Parse(Console.ReadLine());
+                Console.WriteLine("\nEnter Last Name: ");
+                string? lastName = Console.ReadLine();
 
-                switch (userInput)
+                Console.WriteLine("\nEnter Mobile Number: ");
+                long mobileNumber = Convert.ToInt64(Console.ReadLine());
+
+                Console.WriteLine("\nEnter EMail: ");
+                string? eMail = Console.ReadLine();
+
+                Console.WriteLine("\nEnter Address: ");
+                string? address = Console.ReadLine();
+
+                Console.WriteLine("\nEnter City: ");
+                string? city = Console.ReadLine();
+
+                Console.WriteLine("\nEnter State: ");
+                string? state = Console.ReadLine();
+
+                Console.WriteLine("\nEnter Zip: ");
+                int zip = Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine("\nEnter X to Add Contact Details or enter E to exit.");
+                input = Console.ReadLine();
+
+                contactDetail = new Person()
                 {
-                    case 1:
-                        Console.WriteLine("Please Add All the Details :");
-                        Console.Write("Enter the First Name : ");
-                        string first_Name = Console.ReadLine();
-                        Console.Write("Enter the Last Name : ");
-                        string last_Name = Console.ReadLine();
-                        Console.Write("Enter the Mobile Number : ");
-                        string mobile_Number = Console.ReadLine();
-                        Console.Write("Enter the Email Id : ");
-                        string email_Id = Console.ReadLine();
-                        Console.Write("Enter the Address : ");
-                        string address = Console.ReadLine();
-                        Console.Write("Enter the City : ");
-                        string city = Console.ReadLine();
-                        Console.Write("Enter the State : ");
-                        string state = Console.ReadLine();
-                        Console.Write("Enter the Zip : ");
-                        string zip = Console.ReadLine();
-                        Person person1 = new Person()
-                        {
-                            FirstName = first_Name,
-                            LastName = last_Name,
-                            MobileNumber = int.Parse(mobile_Number),
-                            Email = email_Id,
-                            Address = address,
-                            City = city,
-                            State = state,
-                            zip = int.Parse(zip),
-                        };
-                        contactDetail.AddPersonDetails(person1);
+                    FirstName = firstName,
+                LastName = lastName,
+                MobileNumber = mobileNumber,
+                EMail = eMail,
+                Address = address,
+                City = city,
+                State = state,
+                Zip = zip,
+                };
+                contactDetails.AddContactDetails(contactDetail);
+                contactDetails.DisplayContact();
+            }
 
-                        break;
-                    case 2:
-                        contactDetail.DisplayContact();
-                        break;
-                    default:
-                        Console.WriteLine("Exiting the loop .");
-                        flag = false;
-                        break;
-                }
+            Console.WriteLine("\nEnter Y to edit Contact Details");
+            string? input2 = Console.ReadLine();
+
+            while (input2 == "Y")
+            {
+                Console.WriteLine("\nEnter Mobile Number");
+                contactDetails.EditContactDetails(Convert.ToInt64(Console.ReadLine()));
+                contactDetails.DisplayContact();
+
+                Console.WriteLine("\nEnter Y to edit Contact Details or enter E to exit");
+                input2 = Console.ReadLine();
+
+            }
+
+            contactDetails.DisplayContact();
+            Console.ReadLine();
+        }
             }
         }
-    }
-}
+    
