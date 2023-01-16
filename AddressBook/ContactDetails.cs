@@ -8,9 +8,9 @@ namespace AddressBook
 {
     internal class ContactDetailsRepository
     {
-        Dictionary<long, Person> contactDetails = new Dictionary<long, Person>();
+        Dictionary<long, ContactDetails> contactDetails = new Dictionary<long, ContactDetails>();
 
-        public void AddContactDetails(Person contactDetail) //using mobile number because it is unique.
+        public void AddContactDetails(ContactDetails contactDetail) //using mobileNumber because it is unique.
         {
             contactDetails.Add(contactDetail.MobileNumber, contactDetail);
         }
@@ -19,7 +19,7 @@ namespace AddressBook
         {
             var obj = contactDetails[mobileNumber];
             contactDetails.Remove(mobileNumber);
-            Console.WriteLine("\nSelect from below to edit (Enter number 1-8) \n1.First Name \n2.Last Name \n3.Mobile Number \n4.EMail \n5.Address \n6.City \n7.State \n8.Zip");
+            Console.WriteLine("\nSelect from below to edit (Enter number 1-8) \n1.First Name \n2.Last Name \n3.Mobile Number \n4.EMail \n5.Address \n6.City \n7.State \n8.Zip \n");
             int edit = Convert.ToInt32(Console.ReadLine());
             switch (edit)
             {
@@ -74,26 +74,24 @@ namespace AddressBook
             }
         }
 
-
         public void DeleteContact(long mobileNumber)
         {
             var obj = contactDetails[mobileNumber];
             contactDetails.Remove(mobileNumber);
         }
 
-
         public void DisplayContact()
         {
             foreach (var item in contactDetails)
             {
-                Console.WriteLine($"\nFirst Name::{item.Value.FirstName}");
-                Console.WriteLine($"Last Name::{item.Value.LastName}");
-                Console.WriteLine($"Mobile Number::{item.Value.MobileNumber}");
-                Console.WriteLine($"EMail::{item.Value.EMail}");
-                Console.WriteLine($"Address::{item.Value.Address}");
-                Console.WriteLine($"City::{item.Value.City}");
-                Console.WriteLine($"State::{item.Value.State}");
-                Console.WriteLine($"Zip::{item.Value.Zip}");
+                Console.WriteLine($"\nFirst Name      ::{item.Value.FirstName}");
+                Console.WriteLine($"Last Name       ::{item.Value.LastName}");
+                Console.WriteLine($"Mobile Number   ::{item.Value.MobileNumber}");
+                Console.WriteLine($"EMail           ::{item.Value.EMail}");
+                Console.WriteLine($"Address         ::{item.Value.Address}");
+                Console.WriteLine($"City            ::{item.Value.City}");
+                Console.WriteLine($"State           ::{item.Value.State}");
+                Console.WriteLine($"Zip             ::{item.Value.Zip}");
             }
         }
     }
